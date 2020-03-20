@@ -5,8 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="450" Width="400">
+    <Grid Background="GhostWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" BorderBrush="#FFDADFE1" Background="#FFECF0F1" BorderThickness="1" 
+        Height="40" Name="bdrFilter" VerticalAlignment="Top" Grid.ColumnSpan="4">
+            <Label Content="AnswerGoesHere" FontStyle="Italic" Foreground="#FF6C7A89" 
+            Height="20" Name="DisplayArea" Padding="5,0" FontSize="15" HorizontalContentAlignment="Right" />
+        </Border>
+        <!--Row 1-->
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Click="Button_Click" Tag="0">0</Button>
+        <Button Grid.Row="5" Grid.Column="2" Click="Button_Click" Tag=".">.</Button>
+        <Button Grid.Row="5" Grid.Column="3" Click="Button_Click" Tag="=">=</Button>
+        <!--Row 2-->                                              
+        <Button Grid.Row="4" Grid.Column="0" Click="Button_Click" Tag="1">1</Button>
+        <Button Grid.Row="4" Grid.Column="1" Click="Button_Click" Tag="2">2</Button>
+        <Button Grid.Row="4" Grid.Column="2" Click="Button_Click" Tag="3">3</Button>
+        <Button Grid.Row="3" Grid.Column="3" Click="Button_Click" Tag="-">-</Button>
+        <Button Grid.Row="4" Grid.Column="3" Click="Button_Click" Tag="+">+</Button>
+                                                                  
+        <!--Row 3-->                                              
+        <Button Grid.Row="3" Grid.Column="0" Click="Button_Click" Tag="4">4</Button>
+        <Button Grid.Row="3" Grid.Column="1" Click="Button_Click" Tag="5">5</Button>
+        <Button Grid.Row="3" Grid.Column="2" Click="Button_Click" Tag="6">6</Button>
+        <Button Grid.Row="2" Grid.Column="3" Click="Button_Click" Tag="*">*</Button>
+        <!--Row 4-->                                              
+        <Button Grid.Row="2" Grid.Column="0" Click="Button_Click" Tag="7">7</Button>
+        <Button Grid.Row="2" Grid.Column="1" Click="Button_Click" Tag="8">8</Button>
+        <Button Grid.Row="2" Grid.Column="2" Click="Button_Click" Tag="9">9</Button>
+        <Button Grid.Row="1" Grid.Column="3" Click="Button_Click" Tag="/">/</Button>
+        <!--Row 5-->                                              
+        <Button Grid.Row="1" Grid.Column="0" Click="Button_Click" Tag="del">
+            <Image Source="back-arrow.png"></Image>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="1"  Click="Button_Click" Tag="clear-entry">CE</Button>
+        <Button Grid.Row="1" Grid.Column="2"  Click="Button_Click" Tag="clear">C</Button>
     </Grid>
+
+
 </Window>
