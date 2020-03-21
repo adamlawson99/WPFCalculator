@@ -22,35 +22,66 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         private ArrayList userInput;
+        private int i = 0;
         private StringBuilder stringBuilder;
+        private ButtonHandler buttonHandler;
         public MainWindow()
         {
             InitializeComponent();
-            userInput = new ArrayList();
-            stringBuilder = new StringBuilder("", 100);
+            userInput = new ArrayList() {};
+            stringBuilder = new StringBuilder("0", 100);
+            setContent(userInput);
+            stringBuilder.Clear();
+            this.buttonHandler = new ButtonHandler(userInput);
         }
         
-        public void setContent(String userInputAsString)
+        public void setContent(ArrayList userInput)
         {
-            DisplayArea.Content = userInputAsString;
+            foreach(string op in userInput)
+            {
+                stringBuilder.Append(op);
+            }
+            DisplayArea.Content = stringBuilder.ToString();
+            stringBuilder.Clear();
+        }
+
+        private void Button_Number_Click(object sender, RoutedEventArgs e)
+        {
+            userInput = buttonHandler.Button_Number_Click(sender, e);
+            setContent(userInput);
+        }
+
+        //user should only be able to enter one operator, then have to enter a number
+        private void Button_Operator_Click(object sender, RoutedEventArgs e)
+        {
+            userInput = buttonHandler.Button_Operator_Click(sender, e);
+            btn_period.IsEnabled = true;
+            setContent(userInput);
+        }
+
+        //period button must be disabled after user clicks, until an operator is clicked
+        private void Button_Period_Click(object sender, RoutedEventArgs e)
+        {
+            userInput = buttonHandler.Button_Period_Click(sender, e);
+            btn_period.IsEnabled = false;
+            setContent(userInput);
+        }
+
+        private void Button_Delete_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var myValue = ((Button)sender).Tag.ToString();
-            userInput.Add(myValue);
-            setContent(ConstructString(userInput));
-            
-        }
 
-        private string ConstructString(ArrayList userInput) { 
-            //append the last item the user entered to the string after verifying the string is not empty
-            if(userInput.Count > 0)
-            {
-                stringBuilder.Append(userInput[userInput.Count-1]);
-                return stringBuilder.ToString();
-            }
-            return "";
+        }
+        private void Button_Click_Clear(object sender, RoutedEventArgs e)
+        {
+            this.userInput.Clear();
+            this.stringBuilder.Append("0");
+            btn_period.IsEnabled = true;
+            setContent(userInput);
         }
     }
 }
