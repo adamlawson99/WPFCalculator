@@ -29,7 +29,7 @@
         <!--Row 1-->
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Click="Button_Number_Click" Tag="0">0</Button>
         <Button x:Name="btn_period" Grid.Row="5" Grid.Column="2" Click="Button_Period_Click" Tag="." IsEnabled="True">.</Button>
-        <Button Grid.Row="5" Grid.Column="3" Click="Button_Click" Tag="=">=</Button>
+        <Button Grid.Row="5" Grid.Column="3" Click="Button_Click_Equals" Tag="=">=</Button>
         <!--Row 2-->
         <Button Grid.Row="4" Grid.Column="0" Click="Button_Number_Click" Tag="1">1</Button>
         <Button Grid.Row="4" Grid.Column="1" Click="Button_Number_Click" Tag="2">2</Button>

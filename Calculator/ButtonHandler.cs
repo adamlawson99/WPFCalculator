@@ -38,23 +38,30 @@ namespace Calculator
         //user should only be able to enter one operator, then have to enter a number
         public ArrayList Button_Operator_Click(object sender, RoutedEventArgs e)
         {
-            int precedingElem = userInput.Count - 1;
-            if (userInput[precedingElem].Equals("."))
+            try
             {
-                userInput[precedingElem] = ((Button)sender).Tag;
-                return userInput;
-            }
-            if (operators.Contains(userInput[precedingElem]))
+                int precedingElem = userInput.Count - 1;
+                if (userInput[precedingElem].Equals("."))
+                {
+                    userInput[precedingElem] = ((Button)sender).Tag;
+                    return userInput;
+                }
+                if (operators.Contains(userInput[precedingElem]))
+                {
+                    return userInput;
+                }
+                if (numbers.Contains(userInput[precedingElem]))
+                {
+                    userInput.Add(((Button)sender).Tag);
+                    return userInput;
+                }
+                else
+                {
+                    return userInput;
+                }
+            }catch(ArgumentOutOfRangeException err)
             {
-                return userInput;
-            }
-            if (numbers.Contains(userInput[precedingElem]))
-            {
-                userInput.Add(((Button)sender).Tag);
-                return userInput;
-            }
-            else
-            {
+                Console.WriteLine(err);
                 return userInput;
             }
         }
@@ -87,6 +94,12 @@ namespace Calculator
             {
 
             }
+        }
+
+        public string Button_Click_Equals(object sender, RoutedEventArgs e)
+        {
+           string result  = ExpressionEvaluator.EvaluateExpression(userInput);
+           return result;
         }
 
         //returns true if no other elements have been added to the array

@@ -45,6 +45,11 @@ namespace Calculator
             stringBuilder.Clear();
         }
 
+        public void displayAnswer(string ans)
+        {
+            DisplayArea.Content = ans;
+        }
+
         private void Button_Number_Click(object sender, RoutedEventArgs e)
         {
             userInput = buttonHandler.Button_Number_Click(sender, e);
@@ -82,6 +87,13 @@ namespace Calculator
             this.stringBuilder.Append("0");
             btn_period.IsEnabled = true;
             setContent(userInput);
+        }
+
+        private void Button_Click_Equals(object sender, RoutedEventArgs e)
+        {
+           string result = buttonHandler.Button_Click_Equals(sender, e);
+           displayAnswer(result);
+            
         }
     }
 }
