@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
-using System.Linq;
 
 namespace Calculator
 {
@@ -22,12 +21,7 @@ namespace Calculator
     {
         private readonly string[] operators = {"+","-","/","*"};
         private readonly string[] numbers = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", };
-        private ArrayList userInput;
-        public ButtonHandler(ArrayList userInput)
-        {
-            this.userInput = userInput;
-        }
-        public ArrayList Button_Number_Click(object sender, RoutedEventArgs e)
+        public ArrayList Button_Number_Click(object sender, RoutedEventArgs e, ArrayList userInput)
         {
             var myValue = ((Button)sender).Tag.ToString();
             userInput.Add(myValue);
@@ -36,7 +30,7 @@ namespace Calculator
         }
 
         //user should only be able to enter one operator, then have to enter a number
-        public ArrayList Button_Operator_Click(object sender, RoutedEventArgs e)
+        public ArrayList Button_Operator_Click(object sender, RoutedEventArgs e, ArrayList userInput)
         {
             try
             {
@@ -67,15 +61,25 @@ namespace Calculator
         }
 
         //period button must be disabled after user clicks, until an operator is clicked
-        public ArrayList Button_Period_Click(object sender, RoutedEventArgs e)
+        public ArrayList Button_Period_Click(object sender, RoutedEventArgs e, ArrayList userInput)
         {
+
             int precedingElem = userInput.Count - 1;
+            //check if the array is null
+            if(userInput.Count == 0)
+            {
+                userInput.Add("0");
+                userInput.Add(".");
+                return userInput;
+            }
+            //check if user enters a period after an operator
             if(operators.Contains(userInput[precedingElem]))
             {
                 userInput.Add("0");
                 userInput.Add(".");
                 return userInput;
             }
+            //check if user enters a period after a number
             if (numbers.Contains(userInput[precedingElem]))
             {
                 userInput.Add(".");
@@ -88,7 +92,7 @@ namespace Calculator
             }
         }
 
-        public void Button_Delete_Click(object sender, RoutedEventArgs e)
+        public void Button_Delete_Click(object sender, RoutedEventArgs e, ArrayList userInput)
         {
             if(userInput.Count > 1)
             {
@@ -96,16 +100,10 @@ namespace Calculator
             }
         }
 
-        public string Button_Click_Equals(object sender, RoutedEventArgs e)
+        public string Button_Click_Equals(object sender, RoutedEventArgs e, ArrayList userInput)
         {
            string result  = ExpressionEvaluator.EvaluateExpression(userInput);
            return result;
-        }
-
-        //returns true if no other elements have been added to the array
-        private bool VerifyPeriod()
-        {
-            return true;
         }
     }
 }

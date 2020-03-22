@@ -28,11 +28,10 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
+            this.buttonHandler = new ButtonHandler();
             userInput = new ArrayList() {};
-            stringBuilder = new StringBuilder("0", 100);
-            setContent(userInput);
-            stringBuilder.Clear();
-            this.buttonHandler = new ButtonHandler(userInput);
+            this.stringBuilder = new StringBuilder("", 100);
+            setContent("0");
         }
         
         public void setContent(ArrayList userInput)
@@ -45,21 +44,21 @@ namespace Calculator
             stringBuilder.Clear();
         }
 
-        public void displayAnswer(string ans)
+        public void setContent(string ans)
         {
             DisplayArea.Content = ans;
         }
 
         private void Button_Number_Click(object sender, RoutedEventArgs e)
         {
-            userInput = buttonHandler.Button_Number_Click(sender, e);
+            buttonHandler.Button_Number_Click(sender, e, userInput);
             setContent(userInput);
         }
 
         //user should only be able to enter one operator, then have to enter a number
         private void Button_Operator_Click(object sender, RoutedEventArgs e)
         {
-            userInput = buttonHandler.Button_Operator_Click(sender, e);
+            buttonHandler.Button_Operator_Click(sender, e, userInput);
             btn_period.IsEnabled = true;
             setContent(userInput);
         }
@@ -67,7 +66,7 @@ namespace Calculator
         //period button must be disabled after user clicks, until an operator is clicked
         private void Button_Period_Click(object sender, RoutedEventArgs e)
         {
-            userInput = buttonHandler.Button_Period_Click(sender, e);
+            buttonHandler.Button_Period_Click(sender, e, userInput);
             btn_period.IsEnabled = false;
             setContent(userInput);
         }
@@ -91,8 +90,8 @@ namespace Calculator
 
         private void Button_Click_Equals(object sender, RoutedEventArgs e)
         {
-           string result = buttonHandler.Button_Click_Equals(sender, e);
-           displayAnswer(result);
+           string result = buttonHandler.Button_Click_Equals(sender, e, userInput);
+           setContent(result);
             
         }
     }
