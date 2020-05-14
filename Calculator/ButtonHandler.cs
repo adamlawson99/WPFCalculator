@@ -23,6 +23,7 @@ namespace Calculator
         private readonly string[] numbers = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", };
         public ArrayList Button_Number_Click(object sender, RoutedEventArgs e, ArrayList userInput)
         {
+            //get the value of the number the user pressed
             var myValue = ((Button)sender).Tag.ToString();
             userInput.Add(myValue);
             return userInput;
@@ -34,17 +35,22 @@ namespace Calculator
         {
             try
             {
+                //check if the user entered entered a period before this button
+                //if they entered a period and no other characters we can ignore it
                 int precedingElem = userInput.Count - 1;
                 if (userInput[precedingElem].Equals("."))
                 {
                     userInput[precedingElem] = ((Button)sender).Tag;
                     return userInput;
                 }
-                if (operators.Contains(userInput[precedingElem]))
+                //prevent the user from entering two operators in a row
+                //ex: ++ or --
+                else if (operators.Contains(userInput[precedingElem]))
                 {
                     return userInput;
                 }
-                if (numbers.Contains(userInput[precedingElem]))
+                //if the user enters an operator after a number, add the operator to the input
+                else if (numbers.Contains(userInput[precedingElem]))
                 {
                     userInput.Add(((Button)sender).Tag);
                     return userInput;
@@ -92,12 +98,17 @@ namespace Calculator
             }
         }
 
-        public void Button_Delete_Click(object sender, RoutedEventArgs e, ArrayList userInput)
+        public ArrayList Button_Delete_Click(object sender, RoutedEventArgs e, ArrayList userInput)
         {
-            if(userInput.Count > 1)
-            {
+            userInput.RemoveAt(userInput.Count - 1);
+            return userInput;
+        }
 
-            }
+        public ArrayList Button_Click_Clear(object sender, RoutedEventArgs e, ArrayList userInput)
+        {
+            userInput.Clear();
+            userInput.Add("0");
+            return userInput;
         }
 
         public string Button_Click_Equals(object sender, RoutedEventArgs e, ArrayList userInput)

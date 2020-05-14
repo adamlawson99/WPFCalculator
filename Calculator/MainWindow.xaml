@@ -49,9 +49,9 @@
         <Button Grid.Row="1" Grid.Column="3" Click="Button_Operator_Click" Tag="/">/</Button>
         <!--Row 5-->
         <Button Grid.Row="1" Grid.Column="0" Click="Button_Delete_Click" Tag="del">
-            <Image Source="back-arrow.png"></Image>
+            del
         </Button>
-        <Button Grid.Row="1" Grid.Column="1"  Click="Button_Click" Tag="clear-entry">CE</Button>
+        <Button Grid.Row="1" Grid.Column="1"  Click="Button_Click_Clear_Entry" Tag="clear-entry">CE</Button>
         <Button Grid.Row="1" Grid.Column="2"  Click="Button_Click_Clear" Tag="clear">C</Button>
     </Grid>
 

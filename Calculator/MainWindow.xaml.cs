@@ -73,17 +73,21 @@ namespace Calculator
 
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+            if(userInput.Count == 1)
+            {
+                setContent("0");
+                return;
+            }
+            if(userInput.Count >= 1)
+            {
+                buttonHandler.Button_Delete_Click(sender, e, userInput);
+                setContent(userInput);
+            }
 
         }
         private void Button_Click_Clear(object sender, RoutedEventArgs e)
         {
-            this.userInput.Clear();
-            this.stringBuilder.Append("0");
+            buttonHandler.Button_Click_Clear(sender,e,userInput);
             btn_period.IsEnabled = true;
             setContent(userInput);
         }
@@ -93,6 +97,11 @@ namespace Calculator
            string result = buttonHandler.Button_Click_Equals(sender, e, userInput);
            setContent(result);
             
+        }
+
+        private void Button_Click_Clear_Entry(object send, RoutedEventArgs e)
+        {
+
         }
     }
 }
